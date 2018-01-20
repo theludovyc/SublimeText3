@@ -1,0 +1,41 @@
+{
+	"scope": "source.javaScriptU3D",
+
+	"completions":
+	[
+		{"trigger":"public", "contents":"public"},
+		{"trigger":"private", "contents":"private"},
+		{"trigger":"protected", "contents":"protected"},
+		{"trigger":"static", "contents":"static "},
+		{"trigger":"class", "contents":"class"},
+		{"trigger":"class X{}", "contents":"class $1{\n\t$2\n}"},
+		{"trigger":"class X extends Y{}", "contents":"class $1 extends $2{\n\t$3\n}"},
+		{"trigger":"var", "contents":"var"},
+		{"trigger":"var;", "contents":"var $1;"},
+		{"trigger":"var:;", "contents":"var $1:$2;"},
+		{"trigger":"var bX:boolean;", "contents":"var b$1:boolean;"},
+		{"trigger":"var cX:char;", "contents":"var c$1:char;"},
+		{"trigger":"var sX:short;", "contents":"var s$1:short;"},
+		{"trigger":"var iX:int;", "contents":"var i$1:int;"},
+		{"trigger":"var fX:float;", "contents":"var f$1:float;"},
+		{"trigger":"var dX:double;", "contents":"var d$1:double;"},
+		{"trigger":"var sX:String;", "contents":"var s$1:String;"},
+		{"trigger":"var:=;", "contents":"var $1:$2=$3;"},
+		{"trigger":"function();", "contents":"function $1();"},
+		{"trigger":"function(X);", "contents":"function $1($2);"},
+		{"trigger":"function(){}", "contents":"function $1(){\n\t$2\n}"},
+		{"trigger":"function(X){}", "contents":"function $1($2){\n\t$3\n}"},
+		{"trigger":"function():{}", "contents":"function $1():$2{\n\t$3\n}"},
+		{"trigger":"function(X):{}", "contents":"function $1($2):$3{\n\t$4\n}"},
+		{"trigger":"return;", "contents":"return $1;"},
+		{"trigger":"for(X;Y;Z){}", "contents":"for($1;$2;$3){\n\t$4\n}"},
+		{"trigger":"for(X in Z){}", "contents":"for($1 in $2){\n\t$3\n}"},
+		{"trigger":"continue;", "contents":"continue;"},
+		{"trigger":"break;", "contents":"break;"},
+		{"trigger":"while(X){}", "contents":"while($1){\n\t$2\n}"},
+		{"trigger":"do{X}while(Y);", "contents":"do{\n\t$2\n}while($3);"},
+		{"trigger":"switch(X){}", "contents":"switch($1){\n\t$2\n}"},
+		{"trigger":"case X:", "contents":"case $1:"},
+		{"trigger":"default:", "contents":"default:"}
+	]
+}

@@ -1,0 +1,12 @@
+{
+	"scope": "variable.language.preProcessor.violetC",
+
+	"completions":
+	[
+		{"trigger":"include <X.h>", "contents":"include <$1.h>"},
+		{"trigger":"include <stdio.h>", "contents":"include <stdio.h>"},
+		{"trigger":"include <stdlib.h>", "contents":"include <stdlib.h>"},
+		{"trigger":"include \"Y.h\"", "contents":"include \"$1.h\""},
+		{"trigger":"define", "contents":"define $1 $2"}
+	]
+}

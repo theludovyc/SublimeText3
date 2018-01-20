@@ -1,0 +1,8 @@
+{
+	"scope": "source.violetC",
+
+	"completions":
+	[
+		{"trigger":"for", "contents":"for($1;$2;$3){$4}"}
+	]
+}

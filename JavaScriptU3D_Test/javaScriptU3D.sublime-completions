@@ -1,0 +1,17 @@
+{
+	"scope": "source.javaScriptU3D",
+
+	"completions":
+	[
+		{"trigger":":int", "contents":":int"},
+		{"trigger":":int;", "contents":"int;"},
+		{"trigger":":int{", "contents":"int{"},
+		{"trigger":":int{}", "contents":"int{\n\t$1\n}"},
+		{"trigger":":int=;", "contents":"int=$1;"},
+		{"trigger":":float=;", "contents":"float=$1;"},
+		{"trigger":"function();", "contents":"function $1();"},
+		{"trigger":"function(){}", "contents":"function $1(){\n\t$2\n}"},
+		{"trigger":"function():{}", "contents":"function $1():$2{\n\t$3\n}"},
+		{"trigger":"function(1){}", "contents":"function $1($2){\n\t$3\n}"}
+	]
+}

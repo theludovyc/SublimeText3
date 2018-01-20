@@ -1,0 +1,180 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: VioletC
+file_extensions: c
+scope: source.violetC
+
+variables:
+  alphaNumeric: '[A-Z0-9]+'
+  numeric: '-?[0-9]+\.?[0-9]*'
+  boolean: 'true|false|null'
+  
+  protection: 'extern|public|protected|private|static'
+
+  name: '\b[_a-zA-Z0-9]+\b'
+  var_name: '\b_?[a-z][_a-zA-Z0-9]*\b'
+  var_type: 'void|null|char|uchar|short|int|uint|float|double'
+  class_name: '\b_?[A-Z][_a-zA-Z0-9]*\b'
+
+contexts:
+  main:
+    # Comments begin with a '//' and finish at the end of the line
+    - match: '//'
+      scope: punctuation.definition.comment.violetC
+      push: line_comment
+
+    - match: '/\*'
+      scope: punctuation.definition.comment.violetC
+      push: block_comment
+
+    - match: '"'
+      scope: punctuation.definition.string.begin
+      push: double_quoted_string
+
+    - match: '(\#)([a-zA-Z0-9]+) (<)'
+      captures:
+        1: variable.language.violetC
+        2: variable.language.preProcessor.violetC
+        3: punctuation.definition.string.begin
+      set: another_string_end
+
+    - match: '(\#)([a-zA-Z0-9]+) (")'
+      captures:
+        1: variable.language.violetC
+        2: variable.language.preProcessor.violetC
+        3: punctuation.definition.string.begin
+      set: double_quoted_string
+
+    - match: '(\#)([a-zA-Z0-9]+)\b'
+      captures:
+        1: variable.language.violetC
+        2: variable.language.preProcessor.violetC
+
+    - match: '\b{{protection}}\b'
+      scope: variable.language.violetC
+
+    - match: '\b(var|if|else|in)\b'
+      scope: keyword.control.violetC
+
+    - match: '&&'
+      scope: keyword.control.violetC
+
+    - match: '\|\|'
+      scope: keyword.control.violetC
+
+    - match: '\b(function)\b'
+      scope: variable.language.violetC
+
+    - match: '\=({{boolean}})'
+      captures:
+        1: constant.language.boolean.violetC
+
+    - match: '\b(0x{{alphaNumeric}})\b'
+      captures:
+        1: constant.numeric.hexa.violetC
+
+    - match: '\b(0b{{numeric}})\b'
+      captures:
+        1: constant.numeric.violetC
+
+    - match: '\b({{numeric}})\b'
+      captures:
+        1: constant.numeric.violetC
+
+    - match: '\b({{var_type}})\b'
+      captures:
+        1: entity.type.violetC
+
+    - match: '(new) ({{name}})'
+      captures:
+        1: keyword.control.violetC
+        2: entity.type.violetC
+
+    - match: '\b(class)\b'
+      captures:
+        1: variable.language.violetC
+
+    - match: '\b(extends)\b'
+      captures:
+        1: variable.language.violetC
+
+    - match: '\b(this)\b'
+      captures:
+        1: variable.language.this.violetC
+
+    - match: '\b(super)\b'
+      captures:
+        1: variable.language.super.violetC
+
+    - match: '\b(switch)\('
+      captures:
+        1: keyword.control.violetC
+
+    - match: '\b(for)\('
+      captures:
+        1: keyword.control.violetC
+
+    - match: '\b(while)\('
+      captures:
+        1: keyword.control.violetC
+
+    - match: '\b({{name}})\('
+      captures:
+        1: entity.name.function.violetC
+
+    - match: '\b({{name}})\.<'
+      captures:
+        1: entity.name.function.violetC
+
+    - match: '{{class_name}}'
+      scope: support.class.violetC
+
+    - match: '\breturn\b'
+      scope: keyword.control.violetC
+
+    - match: '\bcase\b'
+      scope: keyword.control.violetC
+
+    - match: '\bbreak\b'
+      scope: keyword.control.violetC
+
+    - match: '\bdefault\b'
+      scope: keyword.control.violetC
+
+    - match: '\bdo\b'
+      scope: keyword.control.violetC
+
+    - match: '{{var_name}}'
+      scope: variable.other.violetC
+
+  line_comment:
+    - meta_scope: comment.line.violetC
+    - match: $
+      pop: true
+
+  block_comment:
+    - meta_scope: comment.block.violetC
+    - match: '\*/'
+      pop: true
+
+  another_string_end:
+    - match: '[^>]*'
+      scope: string.quoted.double.javaScript
+    - match: '>|$'
+      scope: punctuation.definition.string.end.javaScript
+      pop: true
+
+  string_begin:
+    - match: '"'
+      scope: string.quoted.double.violetC
+      push: double_quoted_string
+
+  double_quoted_string:
+    - match: '[^"\\]*'
+      scope: string.quoted.double.javaScript
+    - match: '\\.'
+      scope: constant.character.escape.javaScript
+    - match: '"|$'
+      scope: punctuation.definition.string.end.javaScript
+      pop: true
