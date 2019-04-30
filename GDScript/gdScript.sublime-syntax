@@ -1,0 +1,70 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: gdScript
+file_extensions: .gd
+scope: source.gdScript
+
+variables:
+  name: '\b[_a-zA-Z0-9]+\b'
+
+  numeric: '-?[0-9]+\.?[0-9]*'
+
+  var_type: 'void|null|char|uchar|short|int|uint|float|double'
+  var_name: '\b_?[a-z][_a-zA-Z0-9]*\b'
+
+  class_name: '\b_?[A-Z][_a-zA-Z0-9]*\b'
+
+contexts:
+  main:
+    # Comments begin with a '//' and finish at the end of the line
+    - match: '#'
+      scope: punctuation.definition.comment.gdScript
+      push: line_comment
+
+    - match: '"'
+      scope: punctuation.definition.string.begin
+      push: double_quoted_string
+
+    - match: '\b(var|if|else|elif|in|pass)\b'
+      scope: keyword.control.gdScript
+
+    - match: '\b(extends|export|func|signal)\b'
+      captures:
+        1: variable.language.gdScript
+
+    - match: '\b(true|false)\b'
+      captures:
+        1: constant.numeric.gdScript
+
+    - match: '\b({{numeric}})\b'
+      captures:
+        1: constant.numeric.gdScript
+
+    - match: '\b({{var_type}})\b'
+      captures:
+        1: entity.type.gdScript
+
+    - match: '\b({{name}})\('
+      captures:
+        1: entity.name.function.gdScript
+
+    - match: '{{class_name}}'
+      scope: support.class.gdScript
+
+    - match: '{{var_name}}'
+      scope: variable.other.gdScript
+
+  line_comment:
+    - meta_scope: comment.line.gdScript
+    - match: $
+      pop: true
+
+  double_quoted_string:
+    - match: '[^"\\]*'
+      scope: string.quoted.double.javaScript
+    - match: '\\.'
+      scope: constant.character.escape.javaScript
+    - match: '"|$'
+      scope: punctuation.definition.string.end.javaScript
+      pop: true
