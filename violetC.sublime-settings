@@ -1,11 +1,7 @@
 {
 	"extensions":
 	[
-		"c",
-		"cpp",
-		"ino",
-		"cs",
-		"cc",
-		"h"
+		"h",
+		"cpp"
 	]
 }

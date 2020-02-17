@@ -1,0 +1,75 @@
+{
+	"name": "VioletTheme",
+	"variables":
+	{
+		"gray" : "#616263",
+		"blue" : "#3164D2",
+		"darkViolet" : "#643FBA",
+		"violet": "#8C5AFF",
+		"lightViolet": "#A57EFF",
+	},
+	"globals":
+	{
+		"background": "#171717",
+		"foreground": "#A4A4A4",
+		"caret": "#A4A4A4",
+		"selection" : "#443070",
+		"line_highlight" : "#443070",
+	},
+	"rules":
+	[
+		{
+			"name": "Comment",
+			"scope": "comment",
+			"foreground": "var(gray)",
+		},
+		{
+			"name": "String",
+			"scope": "string",
+			"foreground": "var(blue)",
+		},
+		{
+			"name": "Number",
+			"scope": "constant.numeric",
+			"foreground": "var(blue)",
+		},
+		{
+			"name": "Boolean",
+			"scope": "constant.boolean",
+			"foreground": "var(blue)",
+		},
+		{
+			"name": "Language",
+			"scope": "variable.language",
+			"foreground": "var(darkViolet)",
+			"font_style": "italic",
+		},
+		{
+			"name": "Keyword",
+			"scope": "keyword",
+			"foreground": "var(darkViolet)",
+			"font_style": "italic",
+		},
+		{
+			"name": "Type",
+			"scope": "storage.type",
+			"foreground": "var(violet)",
+			"font_style": "italic",
+		},
+		{
+			"name": "ClassName",
+			"scope": "entity.name.class",
+			"foreground": "var(darkViolet)",
+		},
+		{
+			"name": "FunctionName",
+			"scope": "entity.name.function",
+			"foreground": "#A358E9",
+		},
+		{
+			"name": "VarName",
+			"scope": "variable.other",
+			"foreground": "var(lightViolet)",
+		},
+	]
+}

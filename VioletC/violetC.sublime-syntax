@@ -7,43 +7,46 @@ scope: source.violetC
 
 variables:
   alphaNumeric: '[A-Z0-9]+'
-  numeric: '-?[0-9]+\.?[0-9]*'
+  numeric: '-?[0-9]+\.?[0-9]*f?'
   boolean: 'true|false|null'
   
-  protection: 'extern|public|protected|private|static'
+  protection: 'extern|public|protected|private|static|friend|const|virtual'
+
+  keyword: 'class|struct|new|this|if|else|for|while|do|switch|case|break|return|default'
+
+  var_type: 'void|char|uchar|short|int|uint|float|double|bool'
 
   name: '\b[_a-zA-Z0-9]+\b'
   var_name: '\b_?[a-z][_a-zA-Z0-9]*\b'
-  var_type: 'void|null|char|uchar|short|int|uint|float|double'
   class_name: '\b_?[A-Z][_a-zA-Z0-9]*\b'
 
 contexts:
   main:
     # Comments begin with a '//' and finish at the end of the line
     - match: '//'
-      scope: punctuation.definition.comment.violetC
+      scope: comment.punctuation.definition.violetC
       push: line_comment
 
     - match: '/\*'
-      scope: punctuation.definition.comment.violetC
+      scope: comment.punctuation.definition.violetC
       push: block_comment
 
     - match: '"'
-      scope: punctuation.definition.string.begin
+      scope: string.punctuation.definition
       push: double_quoted_string
 
     - match: '(\#)([a-zA-Z0-9]+) (<)'
       captures:
         1: variable.language.violetC
         2: variable.language.preProcessor.violetC
-        3: punctuation.definition.string.begin
+        3: string.punctuation.definition
       set: another_string_end
 
     - match: '(\#)([a-zA-Z0-9]+) (")'
       captures:
         1: variable.language.violetC
         2: variable.language.preProcessor.violetC
-        3: punctuation.definition.string.begin
+        3: string.punctuation.definition
       set: double_quoted_string
 
     - match: '(\#)([a-zA-Z0-9]+)\b'
@@ -54,8 +57,9 @@ contexts:
     - match: '\b{{protection}}\b'
       scope: variable.language.violetC
 
-    - match: '\b(var|if|else|in)\b'
-      scope: keyword.control.violetC
+    - match: '\b({{keyword}})\b'
+      captures:
+        1: keyword.control.violetC
 
     - match: '&&'
       scope: keyword.control.violetC
@@ -63,12 +67,9 @@ contexts:
     - match: '\|\|'
       scope: keyword.control.violetC
 
-    - match: '\b(function)\b'
-      scope: variable.language.violetC
-
-    - match: '\=({{boolean}})'
+    - match: '\b({{boolean}})\b'
       captures:
-        1: constant.language.boolean.violetC
+        1: constant.boolean.violetC
 
     - match: '\b(0x{{alphaNumeric}})\b'
       captures:
@@ -84,40 +85,7 @@ contexts:
 
     - match: '\b({{var_type}})\b'
       captures:
-        1: entity.type.violetC
-
-    - match: '(new) ({{name}})'
-      captures:
-        1: keyword.control.violetC
-        2: entity.type.violetC
-
-    - match: '\b(class)\b'
-      captures:
-        1: variable.language.violetC
-
-    - match: '\b(extends)\b'
-      captures:
-        1: variable.language.violetC
-
-    - match: '\b(this)\b'
-      captures:
-        1: variable.language.this.violetC
-
-    - match: '\b(super)\b'
-      captures:
-        1: variable.language.super.violetC
-
-    - match: '\b(switch)\('
-      captures:
-        1: keyword.control.violetC
-
-    - match: '\b(for)\('
-      captures:
-        1: keyword.control.violetC
-
-    - match: '\b(while)\('
-      captures:
-        1: keyword.control.violetC
+        1: storage.type.violetC
 
     - match: '\b({{name}})\('
       captures:
@@ -128,25 +96,10 @@ contexts:
         1: entity.name.function.violetC
 
     - match: '{{class_name}}'
-      scope: support.class.violetC
-
-    - match: '\breturn\b'
-      scope: keyword.control.violetC
-
-    - match: '\bcase\b'
-      scope: keyword.control.violetC
-
-    - match: '\bbreak\b'
-      scope: keyword.control.violetC
-
-    - match: '\bdefault\b'
-      scope: keyword.control.violetC
-
-    - match: '\bdo\b'
-      scope: keyword.control.violetC
+      scope: entity.name.class
 
     - match: '{{var_name}}'
-      scope: variable.other.violetC
+      scope: variable.other
 
   line_comment:
     - meta_scope: comment.line.violetC
@@ -160,9 +113,9 @@ contexts:
 
   another_string_end:
     - match: '[^>]*'
-      scope: string.quoted.double.javaScript
+      scope: string.quoted.double
     - match: '>|$'
-      scope: punctuation.definition.string.end.javaScript
+      scope: string.punctuation.definition
       pop: true
 
   string_begin:
@@ -172,9 +125,9 @@ contexts:
 
   double_quoted_string:
     - match: '[^"\\]*'
-      scope: string.quoted.double.javaScript
+      scope: string.quoted.double
     - match: '\\.'
-      scope: constant.character.escape.javaScript
+      scope: constant.character.escape
     - match: '"|$'
-      scope: punctuation.definition.string.end.javaScript
+      scope: string.punctuation.definition
       pop: true
