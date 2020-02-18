@@ -14,7 +14,7 @@ variables:
 
   keyword: 'class|struct|new|this|if|else|for|while|do|switch|case|break|return|default'
 
-  var_type: 'void|char|uchar|short|int|uint|float|double|bool'
+  var_type: 'void|char|uchar|short|int|uint|float|double|bool|auto|unsigned'
 
   name: '\b[_a-zA-Z0-9]+\b'
   var_name: '\b_?[a-z][_a-zA-Z0-9]*\b'
@@ -60,12 +60,6 @@ contexts:
     - match: '\b({{keyword}})\b'
       captures:
         1: keyword.control.violetC
-
-    - match: '&&'
-      scope: keyword.control.violetC
-
-    - match: '\|\|'
-      scope: keyword.control.violetC
 
     - match: '\b({{boolean}})\b'
       captures:

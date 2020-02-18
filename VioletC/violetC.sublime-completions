@@ -1,8 +1,7 @@
 {
-	"scope": "source.violetC",
-
 	"completions":
 	[
-		{"trigger":"for", "contents":"for($1;$2;$3){$4}"}
+		{"trigger":"for(auto&& A:As)", "contents":"for(auto&& $1 : $2){$3}"},
+		{"trigger":"for(Z;Z;Z)", "contents":"for($1;$2;$3){$4}"}
 	]
 }
